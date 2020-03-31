@@ -55,7 +55,6 @@ def Get_cookies(username, password):
     for name, value in cookies:
         cookie += '{0}={1};'.format(name, value)
     
-
     return cookie
 
 if __name__ == '__main__':    
