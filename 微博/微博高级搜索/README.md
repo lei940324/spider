@@ -13,16 +13,12 @@
 
 # 使用
 
-设定代码`main`函数中参数：
-
-keyword -  搜索关键词
-
-start        -  开始日期
-
-end          -  结束日期
-
 ```python
-cookie = Get_cookies('微博账号', '微博密码')   # 这里需修改
+设定代码main函数中参数：
+keyword -  搜索关键词
+start   -  开始日期
+end     -  结束日期
+cookie = Get_cookies('微博账号', '微博密码')   
 ```
 
 最后命令行输入：
