@@ -9,7 +9,7 @@
 
 网址：https://s.weibo.com/
 
-![image-20200409221623118](https://raw.githubusercontent.com/lei940324/picture/master/typora202004/09/221936-923226.png)
+<img src= "https://raw.githubusercontent.com/lei940324/picture/master/typora202004/09/221936-923226.png" width="550">
 
 
 # 使用
