@@ -38,7 +38,7 @@ class ThreadGetData(threading.Thread):
             except:
                 break
             output = GetUrl(url, headers=self.headers)
-            if output.err_url == True:
+            if output.err_url:
                 err_url.append(output.err_url)
 
             logging.info('正在解析url:%s' % url)
@@ -57,7 +57,7 @@ class ThreadGetData(threading.Thread):
                 txt = ''.join(map(lambda x: x.strip(), txt))
 
                 # 清洗数据
-                if re.search('展开全文|网页链接|发表了|发布了|分享自', txt) == None and re.findall('#(.*?)#', txt) == []:
+                if re.search('展开全文|网页链接|发表了|发布了|分享自', txt) is None and re.findall(r'#(.*?)#', txt) == []:
                     txt = re.sub(
                         r'(\s)+|/|更多内容请见长微博。| ​ 收起全文|收起全文|\(.*?\)|【(.*?)】', '', txt)
                     txt = re.sub(

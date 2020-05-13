@@ -11,11 +11,11 @@
 
 <img src= "https://raw.githubusercontent.com/lei940324/picture/master/typora202004/09/221936-923226.png" width="550">
 
-
 # 使用
 
-```python
 设定代码main函数中参数：
+
+```python
 keyword -  搜索关键词
 start   -  开始日期
 end     -  结束日期
