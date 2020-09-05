@@ -16,8 +16,9 @@ lock = threading.Lock()
 class ThreadGetData():
     "多线程抓取数据"
 
-    def __init__(self, urlQueue, conn, cur, sleep=0):
+    def __init__(self, urlQueue, respider, conn, cur, sleep=0):
         self.urlQueue = urlQueue
+        self.respider = respider
         self.sleep = sleep
         self.conn = conn
         self.cur = cur
@@ -106,7 +107,7 @@ class ThreadGetData():
                 f"select 是否抓取 from url where 网址=='{urls}' and 是否抓取=='yes'"
             ).fetchone()
             lock.release()
-            if value:  # 在数据库并且已爬取, 则跳过
+            if value and not self.respider:  # 在数据库并且已爬取, 则跳过
                 continue
             else:  # 不在数据库则写入数据库，并加入队列
                 lock.acquire(True)

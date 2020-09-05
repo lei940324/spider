@@ -63,7 +63,7 @@ def get_time(time_start, time_end, clock):
         return [f'{i}:{i}' for i in date]
 
 
-def get_url(timescope, keyword, conn, cur):
+def get_url(timescope, keyword, respider, conn, cur):
     "构建待爬取网页队列"
     urlQueue = Queue()
     base_url = 'https://s.weibo.com/weibo?'
@@ -82,7 +82,7 @@ def get_url(timescope, keyword, conn, cur):
         value = cur.execute(
             f"select 是否抓取 from url where 网址=='{url}' and 是否抓取=='yes'"
         ).fetchone()
-        if value:  # 在数据库并且已爬取，则跳过
+        if value and not respider:  # 在数据库并且已爬取，则跳过
             continue
         else:  # 不在数据库，则将网址放入数据库
             cur.execute(f"replace INTO url VALUES('{url}', 'no')")
@@ -94,13 +94,13 @@ def get_url(timescope, keyword, conn, cur):
     return urlQueue
 
 
-def main(urlQueue, sleep, UserAgent, cookie, conn, cur):
+def main(urlQueue, sleep, UserAgent, cookie, respider, conn, cur):
     header = {"User-Agent": UserAgent, 'Cookie': cookie}
     # 记录线程的列表
     threadCrawl = []
     print('4个采集线程开始运行--------')
     for _ in range(4):
-        Cthread = ThreadGetData(urlQueue, conn, cur, sleep)
+        Cthread = ThreadGetData(urlQueue, respider, conn, cur, sleep)
         threadObj = threading.Thread(target=Cthread.get_text, args=[header])
         threadObj.start()
         threadCrawl.append(threadObj)
